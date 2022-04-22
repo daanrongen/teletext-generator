@@ -32,7 +32,6 @@ if __name__ == "__main__":
     import requests
     from teletextify import Page
     import argparse
-    import sys
 
     parser = argparse.ArgumentParser(description="Teletext Generator")
     parser.add_argument("--size", type=int, default=512)
