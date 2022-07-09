@@ -1,31 +1,39 @@
 def main():
-    response = requests.get(API_URL, params=PARAMS)
-    response_json = response.json()
-
-    for (i, article) in enumerate(response_json["articles"]):
-        print(f"Article {i}: {article['title']}")
-
-        article = {
-            "title": str(article["title"]),
-            "description": str(article["description"]),
-            "image_url": str(article["urlToImage"]),
-            "source": article["source"],
-            "date": str(article["publishedAt"]),
-        }
-
-        page = Page(data=article, size=SIZE)
-        page.mode7()
-        page.build_top_bar(bg_colour="black", txt_colour="random")
-        page.build_bottom_bar(bg_colour="black", txt_colour="random")
-        page.clean_buffer()
-
-        assert page.output.size == (SIZE, SIZE)
-        assert page.output.mode == "RGB"
-
-        if args.show:
-            page.output.show()
-        if args.save:
-            page.output.save(f"{OUTPUT_DIR}/news-{page.image_name}.png", "PNG")
+    data = {
+        "title": "hello world",
+        "description": "description",
+        "image_name": "carista.png"
+    }
+    page = Page(data=data, size=1024)
+    page.mode7()
+    page.output.show()
+    # response = requests.get(API_URL, params=PARAMS)
+    # response_json = response.json()
+    #
+    # for (i, article) in enumerate(response_json["articles"]):
+    #     print(f"Article {i}: {article['title']}")
+    #
+    #     article = {
+    #         "title": str(article["title"]),
+    #         "description": str(article["description"]),
+    #         "image_url": str(article["urlToImage"]),
+    #         "source": article["source"],
+    #         "date": str(article["publishedAt"]),
+    #     }
+    #
+    #     page = Page(data=article, size=SIZE)
+    #     page.mode7()
+    #     page.build_top_bar(bg_colour="black", txt_colour="random")
+    #     page.build_bottom_bar(bg_colour="black", txt_colour="random")
+    #     page.clean_buffer()
+    #
+    #     assert page.output.size == (SIZE, SIZE)
+    #     assert page.output.mode == "RGB"
+    #
+    #     if args.show:
+    #         page.output.show()
+    #     if args.save:
+    #         page.output.save(f"{OUTPUT_DIR}/news-{page.image_name}.png", "PNG")
 
 
 if __name__ == "__main__":

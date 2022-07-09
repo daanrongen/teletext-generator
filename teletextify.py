@@ -13,9 +13,10 @@ class Page:
         super(Page, self).__init__()
         self.title = data["title"]
         self.description = data["description"]
-        self.image_url = data["image_url"]
-        self.source = data["source"]
-        self.date = data["date"]
+        # self.image_url = data["image_url"]
+        self.image_name = data["image_name"]
+        # self.source = data["source"]
+        # self.date = data["date"]
         self.size = size
         self.rows = 40
         self.cols = 24
@@ -33,15 +34,15 @@ class Page:
             "yellow": (255, 255, 0),
         }
 
-        self.image_name = uuid.uuid4()
-        self.buffer_dir = "./buffer"
+        # self.image_name = uuid.uuid4()
+        # self.buffer_dir = "./buffer"
 
-        os.makedirs(self.buffer_dir, exist_ok=True)
-        self.image_path = f"{self.buffer_dir}/{self.image_name}.png"
-        urllib.request.urlretrieve(self.image_url, self.image_path)
+        # os.makedirs(self.buffer_dir, exist_ok=True)
+        self.image_path = f"images/{self.image_name}"
+        # urllib.request.urlretrieve(self.image_url, self.image_path)
 
         self.image = Image.open(self.image_path)
-        self.image = self.image.transpose(Image.ROTATE_90)
+        # self.image = self.image.transpose(Image.ROTATE_90)
         self.image = self.image.convert("RGB")
         self.image = self.center_crop()
 
